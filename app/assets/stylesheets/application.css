@@ -1,15 +1,48 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+#general{
+  border: 1px solid black;
+  font-size: 15px;
+  width: 700px;
+  margin-top: 18px;
+  background-color: #05042557;
+  border-radius: 9px;
+  /* box-shadow: 10px 10px grey; */
+}
+.tabla{
+  border-style: groove;
+  border-color: #22A91F;
+}
+#tabla_name{
+  width: 100px;
+  text-indent: 5px;
+}
+#tabla_address{
+  width: 100px;
+  text-indent: 5px;
+}
+#tabla_uuid{
+  width: 400px;
+  text-align: center;
+}
+.link{
+  font-size: 15px;
+  color: black;
+  border-radius: 3px;
+  box-shadow: 4px 4px grey;
+  background-color: lightgrey;
+}
+.link.menu{
+  margin-left: 10px;
+  border-left: 6px solid green;
+}
+.link.link_new{
+  border-bottom: 6px solid green;
+}
+.link.link_views{
+  border-right: 6px solid green;
+}
+
+/* text-decoration: underline; */
+.show{
+  margin-left: 50px;
+  margin-top: 30px;
+}

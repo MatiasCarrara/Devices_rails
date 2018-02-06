@@ -1,0 +1,18 @@
+<div class="show">
+<%= form_with scope: :device, url: devices_path, local: true do |form| %>  <p>
+
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </p>
+
+  <p>
+    <%= form.label :address %><br>
+    <%= form.number_field :address %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+<%= link_to 'Back', devices_path, :class => "link link_views" %> 
+</div>
