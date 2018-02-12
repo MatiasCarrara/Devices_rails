@@ -2,24 +2,26 @@
 <div id="general">
 
 <h1>Devices</h1>
-<table>
+<table class="table table-striped">
+  <thead class="thead-dark">
   <tr>
     <th>Name</th>
     <th>Address</th>
     <th>UUID</th>
+    <th></th>
   </tr>
+  </thead>
   <% @device.each do |device| %>
     <tr>
-      <td class="tabla" id="tabla_name"><%= device.name %></td>
-      <td class="tabla" id="tabla_address"><%= device.address %></td>
-      <td class="tabla" id="tabla_uuid"><%= device.segunda_id %></td>
-
-      <td><%= link_to 'Show', device_path(device), :class => "link menu" %></td>
+      <td><%= device.name %></td>
+      <td><%= device.address %></td>
+      <td><%= device.uuid %></td>
+      <td><%= link_to 'Show', device_path(device), class: "btn btn-success" %></td>
     </tr>
   <% end %>
 </table>
 <br>
-<%= link_to 'New Device', new_device_path, :class => "link link_new"%><br>
+<%= link_to 'New Device', new_device_path, class: "btn btn-primary"%><br>
 <br>
 </div>
 <br>

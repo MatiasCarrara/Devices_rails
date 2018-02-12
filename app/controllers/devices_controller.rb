@@ -15,8 +15,11 @@ class DevicesController < ApplicationController
   def create
     @device = Device.new(device_params)
 
-    @device.save
-    redirect_to @device
+    if @device.save
+      redirect_to @device
+    else
+      render 'new', status: :unprocessable_entity
+    end
   end
 
   private

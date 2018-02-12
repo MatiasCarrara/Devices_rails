@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
+  get 'devices/index'
 
   resources :devices
 
-  root 'welcome#index'
+  root 'devices#index'
 end
