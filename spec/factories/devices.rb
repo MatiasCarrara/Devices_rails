@@ -5,7 +5,7 @@ FactoryBot.define do
     address 1234
 
     trait :name do
-      name "example"
+      name "iPhone"
     end
 
     trait :invalid_name do

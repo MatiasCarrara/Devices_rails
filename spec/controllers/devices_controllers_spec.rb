@@ -2,9 +2,9 @@ require "rails_helper"
 
 describe DevicesController, type: :controller do
 
-  let(:esto) {Device}
+  let(:device_general) {Device}
 
-  describe 'GET index' do
+  describe 'GET #index' do
     let(:devices) { [create(:device, :name)] }
     before do
       get :index
@@ -20,7 +20,7 @@ describe DevicesController, type: :controller do
     end
   end
 
-  describe 'new' do
+  describe 'GET #new' do
     before do
       get :new
     end
@@ -31,13 +31,12 @@ describe DevicesController, type: :controller do
       expect(response).to render_template(:new)
     end
     it '' do
-      expect(assigns(:device)).to be_a(esto)
+      expect(assigns(:device)).to be_a(device_general)
     end
   end
 
-  describe 'show' do
-
-    context 'si la ID es valida' do
+  describe 'GET #show' do
+    context 'the ID is valid' do
       subject { [create(:device, :name)] }
 
       before do
@@ -54,7 +53,7 @@ describe DevicesController, type: :controller do
       end
     end
 
-    context 'si la ID es invalida' do
+    context 'the ID is invalid' do
       let(:invalid) { 'id_invalid' }
 
       before do
@@ -69,8 +68,8 @@ describe DevicesController, type: :controller do
     end
   end
 
-  describe 'create' do
-    context 'parametros validos' do
+  describe 'POST #create' do
+    context 'valid parameters' do
       let(:hola) {attributes_for(:device, :name)}
 
       before do
@@ -81,14 +80,14 @@ describe DevicesController, type: :controller do
       end
       it '' do
         expect { post :create, params: { device: hola } }
-          .to change(esto, :count).by(1)
+          .to change(device_general, :count).by(1)
       end
       it '' do
-        expect(:device).to redirect_to(esto.last)
+        expect(:device).to redirect_to(device_general.last)
       end
     end
 
-    context 'parametros invalidos' do
+    context 'invalid parameters' do
       let(:invalid) {attributes_for(:device, :invalid_name)}
 
       before do
@@ -99,7 +98,7 @@ describe DevicesController, type: :controller do
       end
       it '' do
         expect { post :create, params: { device: invalid } }
-          .to change(esto, :count).by(0)
+          .to change(device_general, :count).by(0)
       end
       it '' do
         expect(response).to render_template('new')

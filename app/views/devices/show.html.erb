@@ -1,18 +1,19 @@
 <div class="show">
-<p>
-  <strong>Name:</strong>
-  <%= @device.name %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @device.address %>
-</p>
-
-<p>
-  <strong>UUID:</strong>
-  <%= @device.uuid %>
-</p>
-
-<%= link_to 'Back', devices_path, :class => "link link_views" %>
+<table class="table table-striped">
+  <thead class="thead-dark">
+  <tr>
+    <th>Name:</th>
+    <th>Address:</th>
+    <th>UUID:</th>
+  </tr>
+  </thead>
+  <tr>
+    <th><%= @device.name %></th>
+    <th><%= @device.address %></th>
+    <th><%= @device.uuid %></th>
+  </tr>
+</table>
+<center>
+<%= link_to 'Back', devices_path, class:"btn btn-outline-primary" %>
+</center>
 </div>
