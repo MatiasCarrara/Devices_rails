@@ -9,13 +9,13 @@ describe DevicesController, type: :controller do
     before do
       get :index
     end
-    it '' do
+    it 'status codes' do
       expect(response).to have_http_status(:ok)
     end
-    it '' do
+    it 'redirect index' do
       expect(response).to render_template(:index)
     end
-    it '' do
+    it 'get all devices' do
       expect(assigns(:device)).to match_array(devices)
     end
   end
@@ -24,13 +24,13 @@ describe DevicesController, type: :controller do
     before do
       get :new
     end
-    it '' do
+    it 'status codes' do
       expect(response).to have_http_status(:ok)
     end
-    it '' do
+    it 'redirect show ' do
       expect(response).to render_template(:new)
     end
-    it '' do
+    it 'assigns a device to Device' do
       expect(assigns(:device)).to be_a(device_general)
     end
   end
@@ -42,10 +42,10 @@ describe DevicesController, type: :controller do
       before do
         get :show, params: { id: subject }
       end
-      it '' do
+      it 'redirect show' do
         expect(response).to render_template('show')
       end
-      it '' do
+      it 'status codes' do
         expect(response).to have_http_status(:ok)
       end
       it '' do
@@ -59,10 +59,10 @@ describe DevicesController, type: :controller do
       before do
         get :show, params: {id: invalid}
       end
-      it '' do
+      it 'status codes' do
         expect(response).to have_http_status(:not_found)
       end
-      it '' do
+      it 'redirect to error page' do
         expect(response).to render_template('error')
       end
     end
@@ -75,14 +75,14 @@ describe DevicesController, type: :controller do
       before do
         post :create, params: { device: hola }
       end
-      it '' do
+      it 'status codes' do
         expect(response).to have_http_status(:found)
       end
-      it '' do
+      it 'create device' do
         expect { post :create, params: { device: hola } }
           .to change(device_general, :count).by(1)
       end
-      it '' do
+      it 'redirect to the device' do
         expect(:device).to redirect_to(device_general.last)
       end
     end
@@ -93,14 +93,14 @@ describe DevicesController, type: :controller do
       before do
        post :create, params: { device: invalid }
       end
-      it '' do
+      it 'status codes' do
         expect(response).to have_http_status(:unprocessable_entity)
       end
-      it '' do
+      it 'not create device ' do
         expect { post :create, params: { device: invalid } }
           .to change(device_general, :count).by(0)
       end
-      it '' do
+      it 'render template new' do
         expect(response).to render_template('new')
       end
     end
