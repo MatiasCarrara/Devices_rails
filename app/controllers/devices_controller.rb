@@ -1,5 +1,4 @@
 class DevicesController < ApplicationController
-
   def index
     @device = Device.all
   end
