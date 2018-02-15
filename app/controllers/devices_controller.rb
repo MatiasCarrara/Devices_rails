@@ -1,10 +1,10 @@
 class DevicesController < ApplicationController
+  before_action :here, only: [:show, :edit, :update, :destroy]
   def index
     @device = Device.all
   end
 
   def show
-    @device = Device.find(params[:id])
   end
 
   def new
@@ -12,7 +12,6 @@ class DevicesController < ApplicationController
   end
 
   def edit
-    @device = Device.find(params[:id])
   end
 
   def create
@@ -26,7 +25,6 @@ class DevicesController < ApplicationController
   end
 
   def update
-    @device = Device.find(params[:id])
 
     if @device.update(device_params)
       redirect_to @device
@@ -36,7 +34,6 @@ class DevicesController < ApplicationController
   end
 
   def destroy
-    @device = Device.find(params[:id])
     @device.destroy
 
     redirect_to devices_path
@@ -46,5 +43,7 @@ class DevicesController < ApplicationController
     def device_params
       params.require(:device).permit(:name, :address)
     end
-
+    def here
+      @device = Device.find(params[:id])
+    end
 end

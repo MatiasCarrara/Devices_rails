@@ -69,7 +69,7 @@ describe DevicesController, type: :controller do
     end
 
   describe 'GET #edit' do
-    context 'si la ID es valida' do
+    context 'the ID is valid' do
       subject { [create(:device, :name)] }
 
       before do
@@ -86,7 +86,7 @@ describe DevicesController, type: :controller do
       end
     end
 
-    context 'si la ID es invalida' do
+    context 'the ID is invalid' do
       let(:invalid) { 'id_invalid' }
 
       before do
@@ -103,7 +103,7 @@ describe DevicesController, type: :controller do
 
   describe 'PUT #update' do
     subject { create(:device, :name) }
-    context '' do
+    context 'valid parameters' do
       let(:params) { { name: 'ViewSonic', address: 911 } }
       before do
         patch :update, params: { id: subject, device: params }
@@ -123,7 +123,7 @@ describe DevicesController, type: :controller do
       end
     end
 
-    context '' do
+    context 'invalid parameters' do
       let(:params) { { name: 'ViewSonic', address: nil } }
 
       before do
