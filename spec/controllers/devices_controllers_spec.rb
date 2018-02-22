@@ -36,10 +36,10 @@ describe DevicesController, type: :controller do
 
   describe 'GET #show' do
     context 'the ID is valid' do
-      let(:here) { create(:device, :name) }
+      let(:device) { create(:device, :name) }
 
       before do
-        get :show, params: { id: here }
+        get :show, params: { id: device }
       end
       it 'redirect show' do
         expect(response).to render_template('show')
@@ -48,7 +48,7 @@ describe DevicesController, type: :controller do
         expect(response).to have_http_status(:ok)
       end
       it '' do
-        expect(assigns(:device)).to eq(here)
+        expect(assigns(:device)).to eq(device)
       end
     end
 
@@ -69,10 +69,10 @@ describe DevicesController, type: :controller do
 
   describe 'GET #edit' do
     context 'the ID is valid' do
-      subject { create(:device, :name) }
+      let(:device) { create(:device, :name) }
 
       before do
-        get :edit, params: { id: subject }
+        get :edit, params: { id: device }
       end
       it 'status code' do
         expect(response).to have_http_status(:ok)
@@ -81,7 +81,7 @@ describe DevicesController, type: :controller do
         expect(response).to render_template('edit')
       end
       it 'assigns requested device to Device' do
-        expect(assigns(:device)).to eq(subject)
+        expect(assigns(:device)).to eq(device)
       end
     end
 
@@ -101,25 +101,25 @@ describe DevicesController, type: :controller do
   end
 
   describe 'PUT #update' do
-    subject { create(:device, :name) }
+    let(:device) { create(:device, :name) }
     context 'valid parameters' do
       let(:params) { { name: 'ViewSonic', address: 911 } }
 
       before do
-        patch :update, params: { id: subject, device: params }
+        patch :update, params: { id: device, device: params }
       end
       it 'status code' do
         expect(response).to have_http_status(:found)
       end
       it 'redirects device' do
-        expect(:device).to redirect_to(subject)
+        expect(:device).to redirect_to(device)
       end
       it 'assigns requested device to Device' do
-        expect(assigns(:device)).to eq(subject)
+        expect(assigns(:device)).to eq(device)
       end
       it 'update data' do
-        subject.reload
-        expect(subject.name).to eq('ViewSonic')
+        device.reload
+        expect(device.name).to eq('ViewSonic')
       end
     end
 
@@ -127,7 +127,7 @@ describe DevicesController, type: :controller do
       let(:params) { { name: 'ViewSonic', address: nil } }
 
       before do
-        patch :update, params: { id: subject, device: params }
+        patch :update, params: { id: device, device: params }
       end
       it 'status code' do
         expect(response).to have_http_status(:unprocessable_entity)
