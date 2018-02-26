@@ -36,7 +36,6 @@ class DevicesController < ApplicationController
   end
 
   def destroy
-    @device = Device.find(params[:id])
     @device.destroy
 
     redirect_to devices_path
@@ -48,7 +47,7 @@ class DevicesController < ApplicationController
       params.require(:device).permit(:name, :address)
     end
 
-    def device_compare 
+    def device_compare
       @device = Device.find(params[:id])
     end
 end

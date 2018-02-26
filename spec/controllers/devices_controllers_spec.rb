@@ -140,16 +140,16 @@ describe DevicesController, type: :controller do
 
   describe 'POST #create' do
     context 'valid parameters' do
-      subject { attributes_for(:device, :name) }
+      let(:valid) { attributes_for(:device, :name) }
 
       before do
-        post :create, params: { device: subject }
+        post :create, params: { device: valid }
       end
       it 'status codes' do
         expect(response).to have_http_status(:found)
       end
       it 'create device' do
-        expect { post :create, params: { device: subject } }
+        expect { post :create, params: { device: valid } }
           .to change(device_general, :count).by(1)
       end
       it 'redirect to the device' do
@@ -178,17 +178,17 @@ describe DevicesController, type: :controller do
 
   describe 'DELETE #destroy' do
     let!(:device) { create(:device, :name) }
-    subject { delete :destroy, params: { id: device } }
+    let(:destroy) { delete :destroy, params: { id: device } }
     it 'status code' do
-      subject
+      destroy
       expect(response).to have_http_status(:found)
     end
     it 'delete device' do
-      expect { subject }
+      expect { destroy }
         .to change(device_general, :count).by(-1)
     end
     it 'redirect index' do
-      subject
+      destroy
       expect(response).to redirect_to devices_path
     end
   end
