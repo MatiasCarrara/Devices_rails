@@ -6,7 +6,6 @@ class DevicesController < ApplicationController
   end
 
   def show
-    # device_compare
   end
 
   def new
@@ -14,7 +13,6 @@ class DevicesController < ApplicationController
   end
 
   def edit
-    # device_compare
   end
 
   def create
