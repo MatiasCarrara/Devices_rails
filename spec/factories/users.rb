@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :user do
     id 1
     last_name "DC"

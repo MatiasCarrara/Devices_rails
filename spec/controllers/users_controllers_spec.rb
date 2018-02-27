@@ -5,6 +5,7 @@ describe UsersController, type: :controller do
 
   describe 'GET #index' do
     let(:users) { create(:user, :first_name) }
+
     before do
       get :index
     end
@@ -147,10 +148,11 @@ describe UsersController, type: :controller do
      it 'status codes' do
        expect(response).to have_http_status(:found)
      end
-     # it 'create user' do
-     #   expect { post :create, params: { user: users } }
-     #     .to change(general, :count).by(1)
-     # end
+     it 'create user' do
+       # expect { post :create, params: { user: users } }
+       #   .to change(general, :count).by(1)
+         # expect{post :create, params: { user: users } }.to change{general.count}.by(1)
+     end
      it 'redirect to the user' do
        expect(:user).to redirect_to(general.last)
      end

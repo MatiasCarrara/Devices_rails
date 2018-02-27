@@ -114,9 +114,9 @@ describe DevicesController, type: :controller do
       it 'status code' do
         expect(response).to have_http_status(:found)
       end
-      # it 'redirects device' do
-      #   expect(:device).to redirect_to(device)
-      # end
+      it 'redirects device' do
+        expect(:device).to redirect_to(device)
+      end
       it 'assigns requested device to Device' do
         expect(assigns(:device)).to eq(device)
       end
