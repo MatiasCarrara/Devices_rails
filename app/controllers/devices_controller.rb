@@ -1,5 +1,6 @@
 class DevicesController < ApplicationController
   before_action :device_compare, only: %i[show edit update destroy]
+  helper_method :current_user
 
   def index
     @device = Device.all

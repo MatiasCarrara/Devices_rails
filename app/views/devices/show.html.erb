@@ -1,0 +1,21 @@
+<div class="show">
+  <table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th>Name:</th>
+      <th>Address:</th>
+      <th>UUID:</th>
+      <th>User:</th>
+    </tr>
+    </thead>
+    <tr>
+      <th><%= @device.name %></th>
+      <th><%= @device.address %></th>
+      <th><%= @device.uuid %></th>
+      <th><%= @device.user_id %></th>
+    </tr>
+  </table>
+  <center>
+    <%= link_to 'Back', user_devices_path, class:"btn btn-outline-primary" %>
+  </center>
+</div>
