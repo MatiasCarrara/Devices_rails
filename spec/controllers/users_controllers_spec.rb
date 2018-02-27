@@ -1,4 +1,4 @@
-require "rails_helper"
+require 'rails_helper'
 
 describe UsersController, type: :controller do
   let(:general) { User }
@@ -48,7 +48,7 @@ describe UsersController, type: :controller do
       it 'status codes' do
         expect(response).to have_http_status(:ok)
       end
-      it '' do
+      it 'assigns user to User' do
         expect(assigns(:user)).to eq(users)
       end
     end
@@ -69,7 +69,7 @@ describe UsersController, type: :controller do
   end
 
   describe 'GET #edit' do
-    context 'si la ID es valida' do
+    context 'the ID is valid' do
       let(:users) { create(:user, :first_name) }
 
       before do
@@ -86,7 +86,7 @@ describe UsersController, type: :controller do
       end
     end
 
-    context 'si la ID es invalida' do
+    context 'the ID is valid' do
       let(:invalid) { 'id_invalid' }
 
       before do
@@ -103,8 +103,8 @@ describe UsersController, type: :controller do
 
   describe 'PUT #update' do
     let(:users) { create(:user, :first_name) }
-    context '' do
-      let(:params) { { first_name: 'ViewSonic', last_name: "Edifier", email: "@gmail.com" } }
+    context 'the ID is valid' do
+      let(:params) { { first_name: 'Armando', last_name: 'Paredes', email: '@gmail.com' } }
       before do
         patch :update, params: { id: users, user: params }
       end
@@ -119,12 +119,12 @@ describe UsersController, type: :controller do
       end
       it 'update data' do
         users.reload
-        expect(users.first_name).to eq('ViewSonic')
+        expect(users.first_name).to eq('Armando')
       end
     end
 
-    context '' do
-      let(:params) { { first_name: nil, last_name: "Edifier", email: "@gmail.com" } }
+    context 'the ID is invalid' do
+      let(:params) { { first_name: nil, last_name: 'Edifier', email: '@gmail.com' } }
 
       before do
         patch :update, params: { id: users, user: params }
@@ -151,7 +151,7 @@ describe UsersController, type: :controller do
      it 'create user' do
        # expect { post :create, params: { user: users } }
        #   .to change(general, :count).by(1)
-         # expect{post :create, params: { user: users } }.to change{general.count}.by(1)
+       # expect{post :create, params: { user: users } }.to change{general.count}.by(1)
      end
      it 'redirect to the user' do
        expect(:user).to redirect_to(general.last)

@@ -50,7 +50,7 @@ describe DevicesController, type: :controller do
       it 'status codes' do
         expect(response).to have_http_status(:ok)
       end
-      it '' do
+      it 'assigns device to Device' do
         expect(assigns(:device)).to eq(device)
       end
     end
@@ -115,7 +115,7 @@ describe DevicesController, type: :controller do
         expect(response).to have_http_status(:found)
       end
       it 'redirects device' do
-        expect(:device).to redirect_to(device)
+        expect(:device).to redirect_to(user_device_path(users.id, device.id))
       end
       it 'assigns requested device to Device' do
         expect(assigns(:device)).to eq(device)
@@ -155,9 +155,9 @@ describe DevicesController, type: :controller do
         expect { post :create, params: { device: valid, user_id: users.id } }
           .to change(device_general, :count).by(1)
       end
-      # it 'redirect to the device' do
-      #   expect(:device).to redirect_to(device_general.last)
-      # end
+      it 'redirect to the device' do
+        expect(:device).to redirect_to(user_device_path(users.id, device_general.last))
+      end
     end
 
     context 'invalid parameters' do
