@@ -1,20 +1,25 @@
 <center>
-<div id="general">
+<div>
 <table class="table table-striped">
   <thead class="thead-dark">
-  <tr>
-    <th>Name</th>
-    <th>Address</th>
-    <th>UUID</th>
-    <th></th>
-  </tr>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>UUID</th>
+      <th></th>
+    </tr>
   </thead>
   <% @device.each do |device| %>
     <tr>
       <td><%= device.name %></td>
       <td><%= device.address %></td>
       <td><%= device.uuid %></td>
-      <td><%= link_to 'Show', device_path(device), class: "btn btn-success" %></td>
+      <td><%= link_to 'Show', device_path(device), class: "btn btn-success" %>
+          <%= link_to 'Edit', edit_device_path(device), class: "btn btn-info" %>
+          <%= link_to 'Destroy', device_path(device),
+               method: :delete, class: "btn btn-danger",
+               data: { confirm: 'Are you sure you want to delete the device?' } %>
+      </td>
     </tr>
   <% end %>
 </table>

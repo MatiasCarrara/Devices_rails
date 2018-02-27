@@ -1,11 +1,10 @@
-require "rails_helper"
+require 'rails_helper'
 
 describe DevicesController, type: :controller do
-
-  let(:device_general) {Device}
+  let(:device_general) { Device }
 
   describe 'GET #index' do
-    let(:devices) { [create(:device, :name)] }
+    let(:devices) { create(:device, :name) }
     before do
       get :index
     end
@@ -37,10 +36,10 @@ describe DevicesController, type: :controller do
 
   describe 'GET #show' do
     context 'the ID is valid' do
-      subject { [create(:device, :name)] }
+      let(:device) { create(:device, :name) }
 
       before do
-        get :show, params: { id: subject }
+        get :show, params: { id: device }
       end
       it 'redirect show' do
         expect(response).to render_template('show')
@@ -49,7 +48,7 @@ describe DevicesController, type: :controller do
         expect(response).to have_http_status(:ok)
       end
       it '' do
-        expect(assigns(:device)).to eq(subject)
+        expect(assigns(:device)).to eq(device)
       end
     end
 
@@ -57,7 +56,7 @@ describe DevicesController, type: :controller do
       let(:invalid) { 'id_invalid' }
 
       before do
-        get :show, params: {id: invalid}
+        get :show, params: { id: invalid }
       end
       it 'status codes' do
         expect(response).to have_http_status(:not_found)
@@ -68,18 +67,89 @@ describe DevicesController, type: :controller do
     end
   end
 
-  describe 'POST #create' do
-    context 'valid parameters' do
-      let(:hola) {attributes_for(:device, :name)}
+  describe 'GET #edit' do
+    context 'the ID is valid' do
+      let(:device) { create(:device, :name) }
 
       before do
-        post :create, params: { device: hola }
+        get :edit, params: { id: device }
+      end
+      it 'status code' do
+        expect(response).to have_http_status(:ok)
+      end
+      it 'redirect to edit' do
+        expect(response).to render_template('edit')
+      end
+      it 'assigns requested device to Device' do
+        expect(assigns(:device)).to eq(device)
+      end
+    end
+
+    context 'the ID is invalid' do
+      let(:invalid) { 'id_invalid' }
+
+      before do
+        get :show, params: { id: invalid }
+      end
+      it 'status code ' do
+        expect(response).to have_http_status(:not_found)
+      end
+      it 'redirect to error page' do
+        expect(response).to render_template('error')
+      end
+    end
+  end
+
+  describe 'PUT #update' do
+    let(:device) { create(:device, :name) }
+    context 'valid parameters' do
+      let(:params) { { name: 'ViewSonic', address: 911 } }
+
+      before do
+        patch :update, params: { id: device, device: params }
+      end
+      it 'status code' do
+        expect(response).to have_http_status(:found)
+      end
+      it 'redirects device' do
+        expect(:device).to redirect_to(device)
+      end
+      it 'assigns requested device to Device' do
+        expect(assigns(:device)).to eq(device)
+      end
+      it 'update data' do
+        device.reload
+        expect(device.name).to eq('ViewSonic')
+      end
+    end
+
+    context 'invalid parameters' do
+      let(:params) { { name: 'ViewSonic', address: nil } }
+
+      before do
+        patch :update, params: { id: device, device: params }
+      end
+      it 'status code' do
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+      it 'redirect to the edit ' do
+        expect(response).to render_template('edit')
+      end
+    end
+  end
+
+  describe 'POST #create' do
+    context 'valid parameters' do
+      let(:valid) { attributes_for(:device, :name) }
+
+      before do
+        post :create, params: { device: valid }
       end
       it 'status codes' do
         expect(response).to have_http_status(:found)
       end
       it 'create device' do
-        expect { post :create, params: { device: hola } }
+        expect { post :create, params: { device: valid } }
           .to change(device_general, :count).by(1)
       end
       it 'redirect to the device' do
@@ -88,10 +158,10 @@ describe DevicesController, type: :controller do
     end
 
     context 'invalid parameters' do
-      let(:invalid) {attributes_for(:device, :invalid_name)}
+      let(:invalid) { attributes_for(:device, :invalid_name) }
 
       before do
-       post :create, params: { device: invalid }
+        post :create, params: { device: invalid }
       end
       it 'status codes' do
         expect(response).to have_http_status(:unprocessable_entity)
@@ -106,4 +176,20 @@ describe DevicesController, type: :controller do
     end
   end
 
+  describe 'DELETE #destroy' do
+    let!(:device) { create(:device, :name) }
+    let(:destroy) { delete :destroy, params: { id: device } }
+    it 'status code' do
+      destroy
+      expect(response).to have_http_status(:found)
+    end
+    it 'delete device' do
+      expect { destroy }
+        .to change(device_general, :count).by(-1)
+    end
+    it 'redirect index' do
+      destroy
+      expect(response).to redirect_to devices_path
+    end
+  end
 end

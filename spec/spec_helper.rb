@@ -1,7 +1,6 @@
 require 'factory_bot'
 
 RSpec.configure do |config|
-
   config.before(:all) do
     FactoryBot.reload
   end
@@ -9,7 +8,7 @@ RSpec.configure do |config|
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
   config.expect_with :rspec do |expectations|
-  expectations.syntax = [:expect]
+    expectations.syntax = [:expect]
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
   config.mock_with :rspec do |mocks|
@@ -17,6 +16,4 @@ RSpec.configure do |config|
   end
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
-
-
 end
