@@ -5,15 +5,13 @@ class DevicesController < ApplicationController
     @device = Device.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @device = Device.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @device = Device.new(device_params)
