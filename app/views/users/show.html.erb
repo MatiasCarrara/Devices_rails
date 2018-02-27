@@ -1,0 +1,21 @@
+<table class="table table-striped">
+  <thead class="thead-dark">
+  <tr>
+    <th>First Name:</th>
+    <th>Last Name:</th>
+    <th>Email:</th>
+    <th>Devices:</th>
+  </tr>
+  </thead>
+  <tr>
+    <th><%= @user.first_name %></th>
+    <th><%= @user.last_name %></th>
+    <th><%= @user.email %></th>
+    <th><%= @user.devices.count %></th>
+  </tr>
+</table>
+<center>
+  <%= link_to 'New Device', new_user_device_path(@user), class: "btn btn-primary"%><br>
+  <%= link_to 'View Devices', user_devices_path(@user), class: "btn btn-success"%><br>
+  <%= link_to 'Back', users_path, class:"btn btn-outline-primary" %>
+</center>
