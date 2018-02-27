@@ -137,43 +137,43 @@ describe UsersController, type: :controller do
     end
   end
 
-    describe 'POST #create' do
-       context 'valid parameters' do
-         let(:users) {attributes_for(:user, :first_name)}
+ describe 'POST #create' do
+   context 'valid parameters' do
+     let(:users) {attributes_for(:user, :first_name)}
 
-         before do
-           post :create, params: { user: users }
-         end
-         it 'status codes' do
-           expect(response).to have_http_status(:found)
-         end
-         # it 'create user' do
-         #   expect { post :create, params: { user: users } }
-         #     .to change(general, :count).by(1)
-         # end
-         it 'redirect to the user' do
-           expect(:user).to redirect_to(general.last)
-         end
-       end
-
-       context 'invalid parameters' do
-         let(:invalid) { attributes_for(:user, :invalid_first_name) }
-
-         before do
-          post :create, params: { user: invalid }
-         end
-         it 'status codes' do
-           expect(response).to have_http_status(:unprocessable_entity)
-         end
-         it 'not create user ' do
-           expect { post :create, params: { user: invalid } }
-             .to change(general, :count).by(0)
-         end
-         it 'render template new' do
-           expect(response).to render_template('new')
-         end
-       end
+     before do
+       post :create, params: { user: users }
      end
+     it 'status codes' do
+       expect(response).to have_http_status(:found)
+     end
+     # it 'create user' do
+     #   expect { post :create, params: { user: users } }
+     #     .to change(general, :count).by(1)
+     # end
+     it 'redirect to the user' do
+       expect(:user).to redirect_to(general.last)
+     end
+   end
+
+   context 'invalid parameters' do
+     let(:invalid) { attributes_for(:user, :invalid_first_name) }
+
+     before do
+      post :create, params: { user: invalid }
+     end
+     it 'status codes' do
+       expect(response).to have_http_status(:unprocessable_entity)
+     end
+     it 'not create user ' do
+       expect { post :create, params: { user: invalid } }
+         .to change(general, :count).by(0)
+     end
+     it 'render template new' do
+       expect(response).to render_template('new')
+     end
+   end
+  end
 
   describe 'DELETE #destroy' do
     let!(:users) { create(:user, :first_name) }
