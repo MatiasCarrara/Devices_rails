@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :user do
     id 1
     last_name "DC"
-    email "@here"
+    email "@prueba"
 
     trait :first_name do
       first_name "Marvel"
