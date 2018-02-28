@@ -1,10 +1,9 @@
 class UsersController < ApplicationController
   before_action :user_compare, only: %i[show edit update destroy]
-  helper_method :current_user
 
   def index
-     @user = User.all
-   end
+     @users_all = User.all
+  end
 
   def show; end
 
@@ -37,10 +36,6 @@ class UsersController < ApplicationController
     else
       render 'new', status: :unprocessable_entity
     end
-  end
-
-  def current_user
-    @current_user ||= User.find(params[:id])
   end
 
   private

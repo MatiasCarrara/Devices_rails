@@ -16,7 +16,7 @@ describe UsersController, type: :controller do
       expect(response).to render_template(:index)
     end
     it 'get all users' do
-      expect(assigns(:user)).to match_array(users)
+      expect(assigns(:users_all)).to match_array(users)
     end
   end
 
@@ -140,19 +140,18 @@ describe UsersController, type: :controller do
 
  describe 'POST #create' do
    context 'valid parameters' do
-     let(:users) {attributes_for(:user, :first_name)}
+     let(:users) { attributes_for(:user, :first_name) }
+     let(:create){ post :create, params: { user: users } }
 
-     before do
-       post :create, params: { user: users }
-     end
      it 'status codes' do
+       create
        expect(response).to have_http_status(:found)
      end
-     # it 'create user' do
-     #   expect { post :create, params: { user: users } }
-     #     .to change(general, :count).by(1)
-     # end
+     it 'create user' do
+       expect{create}.to change(general, :count).by(1)
+     end
      it 'redirect to the user' do
+       create
        expect(:user).to redirect_to(general.last)
      end
    end

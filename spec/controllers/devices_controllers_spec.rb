@@ -18,7 +18,7 @@ describe DevicesController, type: :controller do
       expect(response).to render_template(:index)
     end
     it 'get all devices' do
-      expect(assigns(:device)).to match_array(devices)
+      expect(assigns(:devices_all)).to match_array(devices)
     end
   end
 
@@ -115,7 +115,7 @@ describe DevicesController, type: :controller do
         expect(response).to have_http_status(:found)
       end
       it 'redirects device' do
-        # expect(:device).to redirect_to(user_device_path(device.id))
+        expect(:device).to redirect_to(user_device_path(users.id, device))
       end
       it 'assigns requested device to Device' do
         expect(assigns(:device)).to eq(device)
