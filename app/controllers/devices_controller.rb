@@ -1,6 +1,5 @@
 class DevicesController < ApplicationController
   before_action :device_compare, only: %i[show edit update destroy]
-  helper_method :current_user
 
   def index
     @devices_all = current_user.devices
@@ -38,9 +37,6 @@ class DevicesController < ApplicationController
     redirect_to user_devices_path
   end
 
-  def current_user
-    @current_user ||= User.find(params[:user_id])
-  end
 
   private
 

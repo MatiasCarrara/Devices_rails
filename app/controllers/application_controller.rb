@@ -7,7 +7,11 @@ class ApplicationController < ActionController::Base
     render 'error/error', status: 404
   end
   def current_user
-    @current_user ||= User.find(params[:id])
+    if params[:id]
+      @current_user ||= User.find(params[:id])
+    else
+      @current_user ||= User.find(params[:user_id])
+    end
   end
 
 end
