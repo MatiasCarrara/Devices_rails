@@ -1,5 +1,5 @@
 <div class="new">
-  <%= form_with scope: :device, url: devices_path, local: true do |form| %>
+  <%= form_with scope: :device, url: user_devices_path, local: true do |form| %>
   <table class="table table-striped">
     <thead class="thead-dark">
       <tr>
@@ -9,7 +9,7 @@
         <th>
           <%= form.label :address %>
         </th>
-        <th>
+        <th></th>
       </tr>
     </thead>
     <tr>
@@ -26,6 +26,22 @@
     <% end %>
   </table>
 <center>
-  <%= link_to 'Back', devices_path, class:"btn btn-outline-primary" %>
+  <%= link_to 'Cancel', user_devices_path(current_user), class:"btn btn-outline-danger" %>
 </center>
+<br>
+<br>
+<% if @device.errors.any? %>
+<div id="error_explanation" class="alert alert-warning alert-dismissible fade show" role="alert">
+  <h5>
+    <%= pluralize(@device.errors.count, "error") %> prohibited
+    this device from being saved:
+  </h5>
+  <ul>
+    <% @device.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
 </div>

@@ -1,0 +1,51 @@
+<%= form_with scope: :user, url: users_path, local: true do |form| %>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th>
+        <%= form.label :first_name %>
+      </th>
+      <th>
+        <%= form.label :last_name %>
+      </th>
+      <th>
+        <%= form.label :email %>
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tr>
+    <th>
+      <%= form.text_field :first_name %>
+    </th>
+    <th>
+      <%= form.text_field :last_name %><br>
+    </th>
+    <th>
+      <%= form.text_field :email %>
+    </th>
+    <th>
+      <%= form.submit %>
+    </th>
+  </tr>
+  </table>
+<% end %>
+<center>
+<%= link_to 'Cancel', users_path, class:"btn btn-outline-danger" %>
+</center>
+<br>
+<br>
+<% if @user.errors.any? %>
+<div id="error_explanation" class="alert alert-warning alert-dismissible fade show" role="alert">
+  <h5>
+    <%= pluralize(@user.errors.count, "error") %> prohibited
+    this user from being saved:
+  </h5>
+  <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>

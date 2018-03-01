@@ -1,4 +1,4 @@
-<%= form_with(model: @device) do |form| %>
+<%= form_for(@device, url: user_device_path(current_user)) do |form| %>
 <table class="table table-striped">
   <thead class="thead-dark">
     <tr>
@@ -12,7 +12,7 @@
       <%= form.text_field :name %>
     </th>
     <th>
-      <%= form.text_field :address %>
+      <%= form.number_field :address %>
     </th>
     <th>
       <%= form.submit %>
@@ -21,5 +21,20 @@
 </table>
 <% end %>
 <center>
-<%= link_to 'Back', devices_path, class:"btn btn-outline-primary" %>
+<%= link_to 'Cancel', user_devices_path(current_user), class:"btn btn-outline-danger" %>
 </center>
+<br>
+<br>
+<% if @device.errors.any? %>
+<div id="error_explanation" class="alert alert-warning alert-dismissible fade show" role="alert">
+  <h5>
+    <%= pluralize(@device.errors.count, "error") %> prohibited
+    this device from being saved:
+  </h5>
+  <ul>
+    <% @device.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>

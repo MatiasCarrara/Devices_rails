@@ -2,24 +2,22 @@ class DevicesController < ApplicationController
   before_action :device_compare, only: %i[show edit update destroy]
 
   def index
-    @device = Device.all
+    @devices_all = current_user.devices
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @device = Device.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
-    @device = Device.new(device_params)
+    @device = current_user.devices.create(device_params)
 
     if @device.save
-      redirect_to @device
+      redirect_to user_device_path(@device.user_id, @device.id)
     else
       render 'new', status: :unprocessable_entity
     end
@@ -27,7 +25,7 @@ class DevicesController < ApplicationController
 
   def update
     if @device.update(device_params)
-      redirect_to @device
+      redirect_to user_device_path
     else
       render 'edit', status: :unprocessable_entity
     end
@@ -36,7 +34,7 @@ class DevicesController < ApplicationController
   def destroy
     @device.destroy
 
-    redirect_to devices_path
+    redirect_to user_devices_path
   end
 
   private
@@ -48,4 +46,5 @@ class DevicesController < ApplicationController
     def device_compare
       @device = Device.find(params[:id])
     end
+
 end
