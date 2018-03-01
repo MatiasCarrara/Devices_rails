@@ -37,7 +37,6 @@ class DevicesController < ApplicationController
     redirect_to user_devices_path
   end
 
-
   private
 
     def device_params
